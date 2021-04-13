@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-cart-header',
   templateUrl: './cart-header.component.html',
-  styleUrls: ['./cart-header.component.css']
+  styleUrls: ['./cart-header.component.css'],
 })
 export class CartHeaderComponent implements OnInit {
-  title = "Shopping cua Hai"
-  numberItems = 4;
-  constructor() { }
+  title = 'Shopping cua Hai';
+  numberItems: number = 4;
+  constructor() {}
 
   ngOnInit(): void {
+    let square = this.numberItems * this.numberItems
   }
-
 }
