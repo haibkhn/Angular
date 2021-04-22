@@ -1,0 +1,19 @@
+<main>
+  <header class="container">
+    <app-cart-header [numberItems]="numberItems"></app-cart-header>
+  </header>
+
+  <section class="container">
+    <app-product-list 
+      [products]="products" 
+      (onRemoveProduct)="removeProduct($event)"
+      (onUpdateQuantity)="handleUpdateQuantity($event)">
+    </app-product-list>
+  </section>
+
+  <section class="container">
+    <app-promo-code></app-promo-code>
+
+    <app-cart-summary [subTotal]="subTotal" [tax]="tax"></app-cart-summary>
+  </section>
+</main>

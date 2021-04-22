@@ -1,18 +1,14 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "ee959550-a198-408e-a10f-ff3445412b26"
+    "analytics": "5f9e64b1-859e-4d1f-adf4-b8b371bdedaf"
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "helloangular": {
+    "windowangular": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/helloangular",
+            "outputPath": "dist/windowangular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,13 +49,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -68,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "helloangular:build"
+            "browserTarget": "windowangular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "helloangular:build:production"
+              "browserTarget": "windowangular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "helloangular:build"
+            "browserTarget": "windowangular:build"
           }
         },
         "test": {
@@ -116,16 +112,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "helloangular:serve"
+            "devServerTarget": "windowangular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "helloangular:serve:production"
+              "devServerTarget": "windowangular:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "helloangular"
+  "defaultProject": "windowangular"
 }
