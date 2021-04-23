@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from './product.model';
+import { PromoCode } from './promo-code.model';
 
 @Component({
   selector: 'app-root',
@@ -32,20 +33,29 @@ export class AppComponent {
       name: 'IPhone 6SE, 169GB',
       description: 'For Who?',
       thumbnail:
-        'https://cdn.tgdd.vn/Products/Images/42/228736/iphone-12-trang-new-600x600-200x200.jpg',
+        'https://cdn.tgdd.vn/Products/Images/42/226472/iphone-se-2021-600-600x600.jpg',
       price: 999,
       quantity: 4,
     },
   ];
 
+  promoCodes: PromoCode[] = [
+    {
+      code: 'AUTUMN',
+      discountPercent: 10
+    },
+    {
+      code: 'WINTER',
+      discountPercent: 20
+    }
+  ]
+
+  // promoCode: string = '';
   numberItems: number = 0;
   subTotal: number = 0;
   tax: number = 0;
-
-  // for (const product of this.products) {
-  //   numberItems += product.quantity;
-  //   subTotal += product.price * product.quantity;
-  // }
+  discountPercent: number = 0;
+  discount: number = 0;
 
   ngDoCheck() {
     this.numberItems = 0;
@@ -55,31 +65,17 @@ export class AppComponent {
       this.numberItems += product.quantity;
       this.subTotal += product.price * product.quantity;
     }
-    this.tax = this.subTotal/10;
-    // this.discount = (this.subTotal * this.discountPercent) / 100;
-    // this.tax = ((this.subTotal - this.discount) * this.taxPercent) / 100;
+    // this.tax = this.subTotal/10;
+    this.discount = (this.subTotal * this.discountPercent) / 100;
+    this.tax = ((this.subTotal - this.discount) * 10) / 100;
   }
 
-  removeProduct(productId: number) {
+  handleremoveProduct(productId: number) {
     const index = this.products.findIndex(product => product.id === productId)
 
     if (index !== -1) {
       this.products.splice(index, 1);
     }
-
-    //Tinh tong so luong san pham va tong tien
-    // let numberItems = 0;
-    // let subTotal = 0;
-    // let tax = 0;
-
-    // for (const product of this.products) {
-    //   numberItems += product.quantity;
-    //   subTotal += product.price * product.quantity;
-    // }
-
-    // this.numberItems = numberItems;
-    // this.subTotal = subTotal;
-    // this.tax = subTotal/10;
   }
 
   handleUpdateQuantity(p: { id: number; quantity: number }) {
@@ -89,4 +85,24 @@ export class AppComponent {
     }
   }
 
+  // handleApplyPromoCode(code: string) {
+  //   const promoCode = this.promoCodes.find(promoCodes => promoCodes.code === code);
+
+
+  // }
+  handleApplyPromoCode(code: string) {
+    const promoCode = this.promoCodes.find(
+      promoCode => promoCode.code === code
+    );
+    this.discountPercent = promoCode ? promoCode.discountPercent : 0;
+    this.discount = (this.subTotal * this.discountPercent) / 100;
+
+    if (this.discount > 0) {
+      alert(`The promotional code was applied.`);
+    } else {
+      alert(
+        'Sorry, the promotional code you entered is not valid! Try code "AUTUMN" (discount 10% to all cart items) or "WINTER" (discount 20% to all cart items).'
+      );
+    }
+  }
 }
